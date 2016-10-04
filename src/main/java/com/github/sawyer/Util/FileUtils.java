@@ -14,17 +14,17 @@ import java.util.*;
  */
 public class FileUtils {
     /**
-     * Read data to dataset
+     * Read data to dataSet
      *
      * @param fileName  the filename, an exception thrown if the file does not exist
      * @param separator the separator, e.g. "\t" or ","
      * @param maxSize   The maximum number of trajectories to read.
      *                  Integer.MAX_VALUE for reading all trajectories.
-     * @return
+     * @return dataSet
      */
     public static List<Trajectory> readData(final String fileName, final String separator, int maxSize) {
         List<Trajectory> dataSet = new ArrayList<>();
-        BufferedReader br = null;
+        BufferedReader br;
 
 
         try {
@@ -67,8 +67,7 @@ public class FileUtils {
             points[i] = new Point(Long.valueOf(row[2 + i * 3]), Double.valueOf(row[3 + i * 3]), Double.valueOf(row[4 + i * 3]));
 
         }
-        Trajectory trajectory = new Trajectory(id, points);
-        return trajectory;
+        return new Trajectory(id, points);
     }
 
     @Deprecated
