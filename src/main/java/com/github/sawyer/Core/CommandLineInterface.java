@@ -2,9 +2,11 @@ package com.github.sawyer.Core;
 
 import com.github.sawyer.Hash.DTW.DtwHashFamily;
 import com.github.sawyer.Hash.EDR.EdrHashFamily;
+import com.github.sawyer.Hash.ERP.ErpHashFamily;
 import com.github.sawyer.Hash.Euclidean.EuclideanHashFamily;
 import com.github.sawyer.Hash.Frechet.FrechetHashFamily;
 import com.github.sawyer.Hash.HashFamily;
+import com.github.sawyer.Hash.LCSS.LcssHashFamily;
 
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class CommandLineInterface {
             System.err.println("no '-q' argument find");
             System.exit(0);
         }
-        dataSet = LSH.readData(dataSetFile, 1000);
+        dataSet = LSH.readData(dataSetFile, 500);
         queries = LSH.readData(queryFile, Integer.MAX_VALUE);
 
         String hashFamilyType = getValue("-f", "fre");
@@ -131,6 +133,10 @@ public class CommandLineInterface {
             family = new FrechetHashFamily(w);
         } else if (hashFamilyType.equalsIgnoreCase("edr")) {
             family = new EdrHashFamily(w);
+        } else if (hashFamilyType.equalsIgnoreCase("erp")) {
+            family = new ErpHashFamily(w);
+        } else if (hashFamilyType.equalsIgnoreCase("lcss")) {
+            family = new LcssHashFamily(w);
         }
         return family;
     }
